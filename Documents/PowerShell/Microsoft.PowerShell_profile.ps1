@@ -33,6 +33,11 @@ function mkcd {param($newFolderName); New-Item $newFolderName -ItemType director
 function admin {Start-Process wt -Verb runAs}
 function rs {& $profile}
 function df {get-volume}
+function up {
+    winget upgrade --include-unknown --all
+    update-module
+    update-script
+}
 Set-Alias -Name su -Value admin
 Set-Alias -Name c -Value clear
 
