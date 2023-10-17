@@ -38,6 +38,8 @@ function up {
     update-module
     update-script
 }
+function reboot {shutdown /r /t 0}
+function bios {Start-Process wt -Verb runAs -argument "shutdown /r /fw /t 0"}
 Set-Alias -Name su -Value admin
 Set-Alias -Name c -Value clear
 
