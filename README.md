@@ -1,2 +1,2 @@
-# dotfiles-windows
+# windots
 My dotfiles for Windows
