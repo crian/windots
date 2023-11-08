@@ -1,16 +1,19 @@
 # PSReadLine
 Import-Module -Name PSReadLine
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+if ($PSVersionTable.PSVersion -ge "7.2") {
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+} else {
+    Set-PSReadLineOption -PredictionSource History
+}
 Set-PSReadLineOption -HistoryNoDuplicates
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 # PSFzf
 Import-Module -Name PsFzf
 Set-PsFzfOption -PsReadlineChordProvider 'Ctrl+t' -PsReadlineChordReverseHistory 'Ctrl+r'
 Set-PsFzfOption -TabExpansion
-Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 # Terminal-Icons
 Import-Module -Name Terminal-Icons
